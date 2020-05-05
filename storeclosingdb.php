@@ -7,7 +7,7 @@
 
 
 <?php 
-
+error_reporting(0);
 $rid = stripcslashes(htmlspecialchars($_POST['rid']));
 $branch =stripcslashes(htmlspecialchars($_POST['branch']));
 

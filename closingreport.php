@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 include('connect.inc.php');
 $rid = stripcslashes(htmlspecialchars($_GET['rid']));
 $semester = stripcslashes(htmlspecialchars($_GET['semester']));
@@ -65,7 +66,22 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
             <td><input type="text" name="description"/></td>
             <td><input type="text" name="cognitivelevels"/></td>
         </tr> -->
-        <?php 
+         <?php
+        if(array_key_exists('print', $_POST)) { 
+			 require('phpToPDF.php');
+
+    $pdf_options = array(
+          "source_type" => 'url',
+          "source" => $_SERVER['REQUEST_URI'],
+          "action" => 'download',
+		  "file_name" => 'closingreport.doc
+		  ');
+		  
+
+    phptopdf($pdf_options);
+        } 
+    ?> 
+		<?php 
             $ser0 = mysqli_query($db, "SELECT row_id, c_no, c_des,cog_level FROM table1 where rid='".$rid."' ");
             echo mysqli_error($db);
             while(   $get_ser0 = mysqli_fetch_assoc($ser0)){
@@ -438,10 +454,17 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
     <input type="hidden" value=<?php echo $_GET["rid"] ;?> name="rid"/>
     <input type="hidden" value=<?php echo $branch ;?> name="branch"/>
     <input type="submit">
-</div>
-</div>
+
     </form>
+
+<form method="post">
+<input type="submit" name="print"
+                class="button" value="Download DOC" /> 
+</form>
+</div>
+</div>
     <body>
+
 
 </html>
 <style type="text/css">

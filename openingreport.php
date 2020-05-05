@@ -1,6 +1,6 @@
 <?php
 // Turn off all error reporting
-//error_reporting(0);
+error_reporting(0);
 ?>
 <?php 
 include('connect.inc.php');
@@ -139,6 +139,21 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
             <td class=''><input type="text" name="PSO2"/></td>
             <td><button type="button" onclick="myFunction('co-po')">Add Row</button></td>
         </tr>
+		 <?php
+        if(array_key_exists('print', $_POST)) { 
+			 require('phpToPDF.php');
+
+    $pdf_options = array(
+          "source_type" => 'url',
+          "source" => $_SERVER['REQUEST_URI'],
+          "action" => 'download',
+		  "file_name" => 'openingreport.doc
+		  ');
+		  
+
+    phptopdf($pdf_options);
+        } 
+    ?> 
         <?php 
             $ser0 = mysqli_query($db, "SELECT row_id,cos,PO1,PO2,PO3,PO4,PO5,PO6,PO7,PO8,PO9,PO10,PO11,PO12,PSO1,PSO2 FROM table2 where rid='".$rid."' ");
             echo mysqli_error($db);
@@ -399,9 +414,15 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
     <input type="hidden" value=<?php echo $_GET["rid"] ;?> name="rid"/>
     <input type="hidden" value=<?php echo $branch ;?> name="branch"/>
     <input type="submit">
-</div>
-</div>
+
 </form>
+
+<form method="post">
+<input type="submit" name="print"
+                class="button" value="Download DOC" /> 
+</form>
+</div>
+</div>
     <body>
 
 </html>

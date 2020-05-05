@@ -115,7 +115,7 @@
 							</div></tr>
 							
 							<tr><div>
-							<td class='mem'>Exit Survey</td>
+							<td class='mem'>Course Outline</td>
 							<td class='mem1'><a href='courseoutline.php?rid=".$rid."&semester=".$semester."&year=".$year."&ccode=".$ccode."&rcname=".$rcname."&nba=".$nba."&branch=".$branch."' class='a'>Click Here</a></td>
 							</div></tr>
 							

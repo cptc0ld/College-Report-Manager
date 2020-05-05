@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
 include('connect.inc.php');
 $rid = stripcslashes(htmlspecialchars($_GET['rid']));
 $semester = stripcslashes(htmlspecialchars($_GET['semester']));
@@ -8,11 +9,26 @@ $rcname = stripcslashes(htmlspecialchars($_GET['rcname']));
 $nba = stripcslashes(htmlspecialchars($_GET['nba']));
 $branch =stripcslashes(htmlspecialchars($_GET['branch']));
 ?>
+ <?php
+        if(array_key_exists('print', $_POST)) { 
+			 require('phpToPDF.php');
+
+    $pdf_options = array(
+          "source_type" => 'url',
+          "source" => 'assesmenttools.php',
+          "action" => 'download',
+		  "file_name" => 'assesmenttools.doc
+		  ');
+		  
+
+    phptopdf($pdf_options);
+        } 
+    ?>
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css?id=2">
-    <link rel="stylesheet" type="text/css" href="openingstyle.css?id=2">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="openingstyle.css">
     
     <script src="https://code.jquery.com/jquery-3.5.0.min.js"  integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="  crossorigin="anonymous"></script>   
     <script type="text/javascript" src="features.js"></script>
@@ -83,9 +99,15 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
     <input type="hidden" value=<?php echo $_GET["rid"] ;?> name="rid"/>
     <input type="hidden" value=<?php echo $branch ;?> name="branch"/>
     <input type="submit">
-</div>
-</div>
+
 </form>
+ 
+<form method="post">
+<input type="submit" name="print"
+                class="button" value="Download DOC" /> 
+</form>
+</div>
+</div>
     <body>
 
 </html>
