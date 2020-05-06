@@ -106,7 +106,7 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
         <h4>Course Description:</h4>
     </u>
     
-    <table class="element3" id='co'>
+    <table class="element3" id='desc'>
         <thead>
             <tr>
                 <th>Module No.</th>
@@ -122,7 +122,7 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
             <td class=''><input type="text" name="mname"></td>
             <td class=''><input type="text" name="mdesc"/></td>
             <td class=''><input type="text" name="mnum"/></td>
-            <td><button type="button" onclick="myFunction('co')">Add Row</button></td>
+            <td><button type="button" onclick="myFunction('desc')">Add Row</button></td>
         </tr>
 
         <?php 
