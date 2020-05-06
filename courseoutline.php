@@ -1,6 +1,6 @@
 <?php
 // Turn off all error reporting
-error_reporting(0);
+//error_reporting(0);
 ?>
 <?php 
 include('connect.inc.php');
@@ -14,21 +14,6 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
 
 
 ?>
-<?php
-        if(array_key_exists('print', $_POST)) { 
-			 require('phpToPDF.php');
-
-    $pdf_options = array(
-          "source_type" => 'url',
-          "source" => $_SERVER['REQUEST_URI'],
-          "action" => 'download',
-		  "file_name" => 'courseoutline.doc
-		  ');
-		  
-
-    phptopdf($pdf_options);
-        } 
-    ?> 
 <html>
 
 <head>
@@ -47,64 +32,10 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
 	<div class="container">
     <div class="page-holder">
         <p style="text-align:center">
-       <h1>Name of the Department: <?php ?> </h1>
-            <h3>AY: <?php echo $year; ?> (<?php echo $semester;?>th Semester)</h3>
-            <h4>Course Outline</h4>
+            <h3></h3>
+            <h4></h4>
         </p>
     </div>
-    <br>
-    <p class="sub">
-    Programme Name: BTech (<?php echo $branch;?>)
-    </p>
-    <p class="sub">
-    Semester: <?php echo $semester;?>
-    </p>
-    <p class="sub">
-    Course Name : <?php echo $ccode;?>
-    </p>
-    <p class="sub">
-    Course Code: <?php echo $rcname;?>
-    </p>
-    
-    <u>
-        <h4>Course Outcomes:</h4>
-    </u>
-
-    <table class="" id='co'>
-        <thead>
-            <tr>
-                <th>COURSE OUTCOMES</th>
-                <th>Description</th>
-                <th>COGNITIVE LEVELS</th>
-            </tr>
-        </thead>
-        <tbody>     
-        <!-- <tr>
-            <td><input type="text" name="course-outcome"/></td>
-            <td><input type="text" name="description"/></td>
-            <td><input type="text" name="cognitivelevels"/></td>
-        </tr> -->
-        <?php 
-            $ser0 = mysqli_query($db, "SELECT row_id, c_no, c_des,cog_level FROM table1 where rid='".$rid."' ");
-            echo mysqli_error($db);
-            while(   $get_ser0 = mysqli_fetch_assoc($ser0)){
-                $c_no = $get_ser0['c_no'];
-                $c_des = $get_ser0['c_des'];
-                $cog_level = $get_ser0['cog_level'];
-                $row_id = $get_ser0['row_id'];
-                echo "<tr>
-                    <td class=''> $c_no </td> 
-                    <td class=''> $c_des </td> 
-                    <td class=''> $cog_level </td> 
-                    
-                    </tr>";
-                }
-        ?>
-        </tbody>
-    </table>
-    <u>
-        <h4>Course Description:</h4>
-    </u>
     
     <table class="element3" id='co'>
         <thead>
@@ -147,11 +78,11 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
         </tbody>
     </table>
     
-   <p style="text-align:center">
+   
     <u>
         <h4 class="sub">Evalution Criteria</h4>
     </u>
-</p>
+
     <table class="" id="co-po">
 
         <thead>
@@ -181,11 +112,9 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
         </tr>
         </tbody>
     </table>
-	<p style="text-align:center">
     <u>
         <h4 class="sub">Recommended Reading material: Author(s), Title, Edition, Publisher, Year of Publication etc. ( Text books, Reference Books, Journals, Reports, Websites etc. in the IEEE format)  </h4>
     </u>
-	</p>
     <table class="element3" id='book'>
         <thead>
                 <th>Sno.</th>
@@ -196,7 +125,7 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
         <tr>
             <td class=''><input type="text" name="sno2"></td>
             <td class=''><input type="text" name="material"/></td>
-            <td><button type="button" onclick="myFunction('book')">Add Row</button></td>
+            <td><button type="button" onclick="myFunction('co-po')">Add Row</button></td>
         </tr>
 
         <?php 
@@ -220,16 +149,9 @@ $branch =stripcslashes(htmlspecialchars($_GET['branch']));
     <input type="hidden" value=<?php echo $_GET["rid"] ;?> name="rid"/>
     <input type="hidden" value=<?php echo $branch ;?> name="branch"/>
     <input type="submit">
-
-
-</form>
- 
-<form method="post">
-<input type="submit" name="print"
-                class="button" value="Download DOC" /> 
-</form>
 </div>
 </div>
+</form>
     <body>
 
 </html>
